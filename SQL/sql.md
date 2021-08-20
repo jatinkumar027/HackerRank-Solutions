@@ -1,90 +1,92 @@
--- 001 Revising the Select Query I
+# SQL
 
+## 001 Revising the Select Query I
+```sql
 Select * from City where Countrycode = "USA" and population > 100000;
-
--- 002 Revising the Select Query II
-
+```
+## 002 Revising the Select Query II
+```sql
 Select NAME from City where Countrycode = "USA" and population > 120000;
-
--- 003 Select All
-
+```
+## 003 Select All
+```sql
 Select * from city;
-
--- 004 Select By ID
-
+```
+## 004 Select By ID
+```sql
 Select * from City where id = 1661;
-
--- 005 Japanese Cities' Attributes
-
+```
+## 005 Japanese Cities' Attributes
+```sql
 Select * from City where Countrycode = "JPN";
-
--- 006 Japanese Cities' Names
-
+```
+## 006 Japanese Cities' Names
+```sql
 Select Name from City where Countrycode = "JPN";
-
--- 007 Weather Observation Station 1
-
+```
+## 007 Weather Observation Station 1
+```sql
 Select city, state from station;
-
--- 008 Weather Observation Station 3
-
+```
+## 008 Weather Observation Station 3
+```sql
 select distinct(city) from station where id IN(SELECT id FROM station WHERE id%2 = 0);
-
--- 009 Weather Observation Station 4
-
+```
+## 009 Weather Observation Station 4
+```sql
 select (Count(City) - Count(Distinct(City))) from Station;
-
--- 010 Weather Observation Station 5
-
+```
+## 010 Weather Observation Station 5
+```sql
 select city, length(city) from station
 order by length(city),city asc
 limit 1;
 select city, length(city) from station
 order by length(city) desc
 limit 1;
-
--- 011 Weather Observation Station 6
-
+```
+## 011 Weather Observation Station 6
+```sql
 Select Distinct(city) from  station where city REGEXP '^a.*|^e.*|^i.*|^o.*|^u.*'
-
--- 012 Weather Observation Station 7
-
+```
+## 012 Weather Observation Station 7
+```sql
 Select Distinct(city) from  station where city REGEXP '.*[aeiou]$'
-
--- 013 Weather Observation Station 8
-
+```
+## 013 Weather Observation Station 8
+```sql
 Select Distinct(city) from  station where city REGEXP '^[aeiou].*[aeiou]$'
-
--- 014 Weather Observation Station 9
-
+```
+## 014 Weather Observation Station 9
+```sql
 Select Distinct(city) from  station where city REGEXP '^[^aeiou].*'
-
--- 015 Weather Observation Station 10
-
+```
+## 015 Weather Observation Station 10
+```sql
 Select Distinct(city) from  station where city REGEXP '.*[^aeiou]$'
-
--- 016 Weather Observation Station 11
-
+```
+## 016 Weather Observation Station 11
+```sql
 Select Distinct(city) from  station where city REGEXP '(^[^aeiou].*)|(.*[^aeiou]$)'
-
--- 017 Weather Observation Station 12
-
+```
+## 017 Weather Observation Station 12
+```sql
 Select Distinct(city) from  station where city REGEXP '^[^aeiou].*[^aeiou]$'
-
--- 018 Higher Than 75 Marks
-
+```
+## 018 Higher Than 75 Marks
+```sql
 Select name from students where marks>75 order by right(name,3), id;
-
--- 019 Employee Names
-
+```
+## 019 Employee Names
+```sql
 Select name from Employee order by name;
-
--- 020 Employee Salaries
-
+```
+## 020 Employee Salaries
+```sql
 Select name from employee where salary > 2000 and months<10 order by employee_id;
-
--- 021 Type of Triangle
-
+```
+## 021 Type of Triangle
+```sql
 SELECT CASE             
             WHEN A + B > C AND B + C > A AND A + C > B THEN
                 CASE 
@@ -95,9 +97,9 @@ SELECT CASE
             ELSE 'Not A Triangle'
         END
 FROM TRIANGLES;
-
--- 022 The PADS
-
+```
+## 022 The PADS
+```sql
 select concat(
     Name,'(',Substring(Occupation,1,1),')'
     ) from occupations order by name;
@@ -107,9 +109,9 @@ Select concat(
 from occupations 
 group by occupation 
 order by COUNT(OCCUPATION), OCCUPATION; 
-
--- 023 Occupations
-
+```
+## 023 Occupations
+```sql
 set @index1=0, @index2=0, @index3=0, @index4=0;
 select min(Doctor), min(Professor), min(Singer), min(Actor)
 from(
@@ -125,50 +127,50 @@ SELECT case
         case when Occupation='Actor' then Name end as Actor
     
 FROM OCCUPATIONS order by name) aliased group by RowNumber;
-
--- 024 Binary Tree Nodes
-
+```
+## 024 Binary Tree Nodes
+```sql
 SELECT 
         N,
         IF(P IS NULL, 'Root', 
            IF((SELECT COUNT(P) AS C FROM BST GROUP BY P HAVING P = N) > 0, 'Inner', 
               'Leaf')) AS CATEGORY
 FROM BST ORDER BY N;
-
--- 025 New Companies
-
+```
+## 025 New Companies
+```sql
 -- To do 
-
--- 026 Revising Aggregations - The Count Function
-
+```
+## 026 Revising Aggregations - The Count Function
+```sql
 Select count(name) from city where population>100000;
-
--- 027 Revising Aggregations - The Sum Function
-
+```
+## 027 Revising Aggregations - The Sum Function
+```sql
 Select sum(population) from city where district = "California";
-
--- 028 Revising Aggregations - Averages
-
+```
+## 028 Revising Aggregations - Averages
+```sql
 Select avg(population) from city where district = "California";
-
--- 029 Average Population
-
+```
+## 029 Average Population
+```sql
 Select round(avg(population)) from city;
-
--- 030 Japan Population
-
+```
+## 030 Japan Population
+```sql
 Select sum(population) from city where countrycode = "JPN";
-
--- 031 Population Density Difference
-
+```
+## 031 Population Density Difference
+```sql
 Select max(population) - min(population) from city;
-
--- 032 The Blunder
-
+```
+## 032 The Blunder
+```sql
 SELECT CEIL((AVG(salary)) - (AVG(REPLACE(salary, '0', '')))) FROM employees;
-
--- 033 Top Earners
-
+```
+## 033 Top Earners
+```sql
 Select 
     max(salary*months), 
     count(*) from employee 
@@ -176,54 +178,54 @@ group by
     salary 
 HAVING 
     MAX(months * salary) = (SELECT MAX(months * salary) from employee);
-
--- 034 Weather Observation Station 2
-
+```
+## 034 Weather Observation Station 2
+```sql
 select round(sum(lat_n),2), round(sum(long_w),2) from station;
-
--- 035 Weather Observation Station 13
-
+```
+## 035 Weather Observation Station 13
+```sql
 select truncate(sum(lat_n),4) from station where lat_n between 38.7880 and 137.2345;
-
--- 036 Weather Observation Station 14
-
+```
+## 036 Weather Observation Station 14
+```sql
 Select truncate(max(lat_n),4) from station where lat_n < 137.2345;
-
--- 037 Weather Observation Station 15
-
+```
+## 037 Weather Observation Station 15
+```sql
 Select 
     round(long_w,4) 
 from 
     station
 where 
     lat_n = (select max(lat_n) from station where lat_n < 137.2345);
-
--- 038 Weather Observation Station 16
-
+```
+## 038 Weather Observation Station 16
+```sql
 Select round(min(lat_n),4) from station where lat_n > 38.7780;
-
--- 039 Weather Observation Station 17
-
+```
+## 039 Weather Observation Station 17
+```sql
 Select 
     round(long_w,4) 
 from
     station 
 where lat_n = (Select min(lat_n) from station where lat_n>38.7780);
-
--- 040 Weather Observation Station 18
-
+```
+## 040 Weather Observation Station 18
+```sql
 Select 
     round((abs(min(lat_n)-max(lat_n)) + abs(min(long_w) - max(long_w))), 4) 
 from station;
-
--- 041 Weather Observation Station 19
-
+```
+## 041 Weather Observation Station 19
+```sql
 Select 
     round(sqrt(power((max(lat_n)-min(lat_n)),2) + power((max(long_w)-min(long_w)),2)),4) 
 From station;
-
--- 042 Weather Observation Station 20
-
+```
+## 042 Weather Observation Station 20
+```sql
 Set @n := 0;
 Select count(*) from station into @total;
 
@@ -235,9 +237,9 @@ then median.indexval in (@total/2, @total/2+1)
 else median.indexval = (@total+1)/2
 
 end;
-
--- 043 Population Census
-
+```
+## 043 Population Census
+```sql
 Select 
     sum(city.population) 
 from 
@@ -245,9 +247,9 @@ from
     inner join country on city.countrycode = country.code 
 where 
     country.continent = "Asia";
-
--- 044 African Cities
-
+```
+## 044 African Cities
+```sql
 Select 
     city.name 
 from 
@@ -255,9 +257,9 @@ from
     inner join country on city.countrycode = country.code 
 where 
     country.continent = "Africa";
-
--- 045 Average Population of Each Continent
-
+```
+## 045 Average Population of Each Continent
+```sql
 Select
     Country.Continent, 
     floor(Avg(city.population)) 
@@ -266,9 +268,9 @@ from
     inner join country on city.countrycode = country.code 
 group by 
     country.continent;
-
--- 046 The Report
-
+```
+## 046 The Report
+```sql
 Select 
     if(grade<8, NULL, Name), 
     Grade, 
@@ -280,9 +282,9 @@ where
     marks between Min_mark and Max_mark 
 order by 
     grade desc, name;
-
--- 047 Top Competitors
-
+```
+## 047 Top Competitors
+```sql
 Select 
     hackers.hacker_id as hid, 
     hackers.name as name
@@ -298,9 +300,9 @@ order by
     count(hackers.hacker_id) desc, 
     hid asc
 ;
-
--- 048 Ollivander's Inventory
-
+```
+## 048 Ollivander's Inventory
+```sql
 Select 
     w1.id,
     wp1.age,
@@ -318,9 +320,9 @@ where
     wp2.age = wp1.age and w2.power = w1.power)
 order by
     w1.power desc, wp1.age desc;
-
--- 049 Challenges
-
+```
+## 049 Challenges
+```sql
 Select 
     challenges.hacker_id, 
     hackers.name, 
@@ -346,9 +348,9 @@ having
 order by 
     challengecount DESC, 
     challenges.hacker_id;
-
--- 050 Contest Leaderboard
-
+```
+## 050 Contest Leaderboard
+```sql
 SELECT HACKER_ID, NAME, SUM(CHALLENGE_MAXIMUM_SCORE) AS HACKER_TOTAL_SCORE 
 FROM
 (
@@ -373,13 +375,13 @@ HAVING
 ORDER BY 
     SUM(CHALLENGE_MAXIMUM_SCORE) DESC, 
     HACKER_ID ASC;
-
--- 051 SQL Project Planning
-
+```
+## 051 SQL Project Planning
+```sql
 -- to do
-
--- 052 Placements
-
+```
+## 052 Placements
+```sql
 Select 
     Students.name 
 from 
@@ -391,9 +393,9 @@ where
     p1.salary < p2.salary 
 order by
     p2.salary;
-
--- 053 Symmetric Pairs
-
+```
+## 053 Symmetric Pairs
+```sql
 Select
     t1.X,
     t1.Y 
@@ -407,25 +409,25 @@ having
     count(t1.x) > 1 or t1.X < t1.Y
 order by
     X;
-
--- 054 Interviews
-
+```
+## 054 Interviews
+```sql
 -- to do
-
--- 055 15 Days of Learning SQL
-
+```
+## 055 15 Days of Learning SQL
+```sql
 -- to do
-
--- 056 Draw The Triangle 1
-
+```
+## 056 Draw The Triangle 1
+```sql
 set @number = 21;
 select 
     repeat('* ', @number := @number - 1)
 from
     information_schema.tables;
-
--- 057 Draw The Triangle 2
-
+```
+## 057 Draw The Triangle 2
+```sql
 set @number = 0;
 select
     repeat('* ', @number := @number + 1)
@@ -433,9 +435,9 @@ from
     information_schema.tables
 where
     @number<20;
-
--- 058 Print Prime Numbers
-
+```
+## 058 Print Prime Numbers
+```sql
 USE INFORMATION_SCHEMA;
 
 SET @NUM1 = 1;
@@ -477,3 +479,4 @@ FROM
     ) A
 ) B 
 ORDER BY LENGTH(FO) DESC LIMIT 1;
+```
