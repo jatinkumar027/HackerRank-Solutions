@@ -573,88 +573,457 @@ string, n = sorted(s[0]), int(s[1])
 
 print(*map(''.join, combinations_with_replacement(string, n)),  sep='\n')
 ```
-## 0
+## 046 Word Order
 
 ```python
-
+from collections import Counter
+n = int(input())
+mylist = []
+for i in range(0,n):
+    mylist.append(input())
+x = Counter(mylist)    
+print(len(x.values()))
+print(*x.values())
 ```
-## 0
+## 047 Set .discard(), .remove() & .pop()
 
 ```python
+n = int(input())
+s = set(map(int, input().split()))
+m = int(input())
 
+for i in range(0,m):
+    myinputlist = input().split()
+    if(myinputlist[0] == 'pop'):
+        try:
+            s.pop()
+        except:
+            pass    
+    elif(myinputlist[0] == 'discard'):
+        s.discard(int(myinputlist[1]))
+    elif(myinputlist[0] == 'remove'):
+        try:
+            s.remove(int(myinputlist[1])) 
+        except:
+            pass     
+print(sum(s))
 ```
-## 0
+## 048 Collections.deque()
 
 ```python
+from collections import deque
 
+d = deque()
+n = int(input())
+
+for i in range(0, n):
+    string = input().split()
+    if(string[0] == 'append'):
+        d.append(int(string[1]))
+    elif(string[0] == 'appendleft'):
+        d.appendleft(int(string[1]))
+    elif(string[0] == 'pop'):
+        d.pop()
+    elif(string[0] == 'popleft'):
+        d.popleft()
+print(*d)
 ```
-## 0
+## 049 Compress the String!
 
 ```python
+from itertools import groupby
 
+L = input()
+key_func = lambda x: x[0]
+  
+for key, group in  groupby(L, key_func):
+    print(tuple([len(list(group)), int(key)]), end = ' ')
 ```
-## 0
+## 050 Company Logo
 
 ```python
+import math
+import os
+import random
+import re
+import sys
+from collections import Counter
 
+temp = None
+
+if __name__ == '__main__':
+    s = list(input())
+    mydict = Counter(s)
+    sorted_string = sorted(mydict.items(), key=lambda x: (-x[1],x[0]))[0:3]
+    if len(set(dict(sorted_string).values())) == 1 :
+        sorted_string = sorted(mydict.items(), key=lambda x: (-x[1],x[0])) [0:3]
+    
+    for x, y in sorted_string:
+        print(x, y)
 ```
-## 0
+## 051 Set .union() Operation
 
 ```python
+n = int(input())
+s1 = set(input().split())
+m  = int(input())
+s2 = set(input().split())
 
+print(len(s1.union(s2)))
 ```
-## 0
+## 052 Piling Up!
 
 ```python
+from collections import deque
 
+for _ in range(int(input())):  
+    _, queue =input(), deque(map(int, input().split()))
+    
+    for cube in reversed(sorted(queue)):
+        if queue[-1] == cube: queue.pop()
+        elif queue[0] == cube: queue.popleft()
+        else:
+            print('No')
+            break
+    else: print('Yes')
 ```
-## 0
+## 053 Triangle Quest 2
 
 ```python
-
+for i in range(1,int(input())+1): #More than 2 lines will result in 0 score. Do not leave a blank line also
+    print(((10**i)//9)**2)
 ```
-## 0
+## 054 Iterables and Iterators
 
 ```python
+from itertools import combinations
 
+_,s,n = input(),input().split(),int(input())
+t = list(combinations(s,n))
+f = sum((1 for i in t if 'a' in i))
+print(f/len(t))
 ```
-## 0
+## 055 Set .intersection() Operation
 
 ```python
-
+n = int(input())
+s1 = set(input().split())
+m = int(input())
+print(len(s1.intersection(input().split())))
 ```
-## 0
+## 056 Mod Divmod
 
 ```python
-
+n, m = int(input()), int(input())
+print(int(n/m), n%m, tuple([int(n/m), n%m]), sep = '\n')  
 ```
-## 0
+## 057 Power - Mod Power
 
 ```python
+a, b, m = int(input()), int(input()), int(input())
 
+print(int(pow(a,b)))
+print(int(pow(a,b,m)))
 ```
-## 0
+## 058 Maximize It!
 
 ```python
+from itertools import product
+K, M = map(int, input().split())
+N = (list(map(int, input().split()))[1:] for _ in range(K))
 
+results = map(lambda x: sum(i**2 for i in x)%M, product(*N))
+print(max(results))
 ```
-## 0
+## 059 Set .difference() Operation
 
 ```python
-
+n = int(input())
+s1 = set(input().split())
+m = int(input())
+print(len(s1.difference(input().split())))
 ```
-## 0
+## 060 Integers Come In All Sizes
 
 ```python
-
+print(pow(int(input()), int(input())) + pow(int(input()), int(input())))
 ```
-## 0
+## 061 Set .symmetric_difference() Operation
 
 ```python
+n = int(input())
+s1 = set(input().split())
+m = int(input())
 
+print(len(s1.symmetric_difference(input().split())))
 ```
-## 0
+## 062 Set Mutations
 
 ```python
+n, s, t = int(input()), set(map(int, input().split())), int(input()) 
 
+
+for _ in range(t):
+    m = input().split()
+    func, length = m[0], int(m[1])
+    h = set(map(int, input().split()))
+    
+    if(func == 'intersection_update'):
+        s.intersection_update(h)
+    elif(func == 'update'):
+        s.update(h)
+    elif(func == 'symmetric_difference_update'):
+        s.symmetric_difference_update(h)
+    elif(func == 'difference_update'):
+        s.difference_update(h) 
+    
+print(sum(s))
+```
+## 063 Triangle Quest
+
+```python
+for i in range(1,int(input())): #More than 2 lines will result in 0 score. Do not leave a blank line also
+    print((10**i // 9)*i )
+```
+## 064 The Captain's Room
+
+```python
+from collections import Counter
+k = int(input())
+rooms = list(map(int, input().split()))
+
+roomcount = Counter(rooms)
+
+for key, value in roomcount.items():
+    if(value!=k):
+        print(key)
+        break
+```
+## 065 Check Subset
+
+```python
+t = int(input())
+
+for i in range(0, t):
+    _ = input()
+    A = set(map(int,input().split()))
+    __ = input()
+    B = set(map(int,input().split()))
+    print(A.issubset(B))
+```
+## 066 Check Strict Superset
+
+```python
+A = set(map(int, input().split()))
+t = int(input())
+
+for i in range(t):
+    B = set(map(int, input().split()))
+    if A.issuperset(B) is False:
+        print(False)
+        break 
+else:
+    print(True)
+```
+## 067 Classes: Dealing with Complex Numbers
+
+```python
+class Complex(object):
+    def __init__(self, real, imag):
+        self.real = real
+        self.imag = imag
+
+    def __add__(self, n):
+        comp = n + complex(self.real, self.imag)
+        return Complex(comp.real, comp.imag)
+
+    def __sub__(self, n):
+        comp = n - complex(self.real, self.imag)
+        return Complex(comp.real, comp.imag)
+
+    def __mul__(self, n):
+        comp = n * complex(self.real, self.imag)
+        return Complex(comp.real, comp.imag)
+
+    def __truediv__(self, n):
+        comp = n / complex(self.real, self.imag)
+        return Complex(comp.real, comp.imag)
+
+    def mod(self):
+        comp = complex(math.sqrt(self.real**2 + self.imag**2))
+        return Complex(comp.real, comp.imag)
+
+    def __str__(self):
+        if self.imag == 0:
+            result = "{:.2f}+0.00i".format(self.real)
+        elif self.real == 0:
+            if self.imag >= 0:
+                result = "0.00+{:.2f}i".format(self.imag)
+            else:
+                result = "0.00-{:.2f}i".format(abs(self.imag))
+        elif self.imag > 0:
+            result = "{:.2f}+{:.2f}i".format(self.real, self.imag)
+        else:
+            result = "{:.2f}-{:.2f}i".format(self.real, abs(self.imag))
+        return result
+```
+## 068 Class 2 - Find the Torsional Angle
+
+```python
+class Points(object):
+    def __init__(self, x, y, z):
+        self.x=x
+        self.y=y
+        self.z=z
+
+    def __sub__(self, no):
+        return Points(no.x-self.x, no.y-self.y, no.z-self.z)
+
+    def dot(self, no):
+        return self.x*no.x+self.y*no.y+self.z*no.z
+
+    def cross(self, no):
+        return Points(self.y*no.z-self.z*no.y,
+             self.z*no.x-self.x*no.z,
+             self.x*no.y-self.y*no.x)
+
+    def absolute(self):
+        return pow((self.x ** 2 + self.y ** 2 + self.z ** 2), 0.5)
+```
+## 069 Zipped!
+
+```python
+n, x = map(int, input().split())
+sheet = []
+for _ in range(x):
+    sheet.append( map(float, input().split()) )
+
+for i in zip(*sheet):
+    print(sum(i)/len(i))
+```
+## 070 Input()
+
+```python
+s =  list(map(int, input().split()))
+x, k = s[0], s[1]
+poly = input()
+
+print(eval(poly) == k)
+```
+## 071 Python Evaluation
+
+```python
+var = input()
+eval(var)
+```
+## 072 Athlete Sort
+
+```python
+import math
+import os
+import random
+import re
+import sys
+
+
+
+if __name__ == '__main__':
+    nm = input().split()
+
+    n = int(nm[0])
+
+    m = int(nm[1])
+
+    arr = []
+
+    for _ in range(n):
+        arr.append(list(map(int, input().rstrip().split())))
+
+    k = int(input())
+    for item in sorted(arr, key = lambda x: x[k]):
+        print(*item)
+```
+## 073 Any or All
+
+```python
+x, N = int(input()), input().split()
+print(all(int(n) > 0 for n in N) and any(n==n[::-1] for n in N))
+```
+## 074 ginortS
+
+```python
+def getKey(x):
+    if x.islower():
+        return(1,x)
+    elif x.isupper():
+        return(2,x)
+    elif x.isdigit() :
+        if int(x)%2==1:
+            return(3,x)
+        else :
+            return(4,x)
+
+print(*sorted(input(),key=getKey),sep='')
+```
+## 075 Detect Floating Point Number
+
+```python
+import re
+pattern = '^[+-]?[0-9]*[.][0-9]+$'
+
+n = int(input())
+for i in range(n):
+    x = input()
+    print(bool(re.match(pattern, x)))
+```
+## 076 Map and Lambda Function
+
+```python
+cube = lambda x: pow(x,3)# complete the lambda function 
+
+def fibonacci(n):
+    # return a list of fibonacci numbers
+    lis = [0,1]
+    for i in range(2,n):
+        lis.append(lis[i-2] + lis[i-1])
+    return(lis[0:n])  
+```
+## 077 Re.split()
+
+```python
+regex_pattern = r"[,.]"	# Do not delete 'r'.
+```
+## 078 Validating Email Addresses With a Filter
+
+```python
+import re
+def fun(s):
+    # return True if s is a valid email, else return False
+    pattern = '^[a-zA-Z0-9_-]+[@][a-zA-Z0-9]+[.][a-zA-Z]{1,3}$'
+    if(re.match(pattern, s)):
+        return True
+    else:
+        return False
+```
+## 079 Group(), Groups() & Groupdict()
+
+```python
+import re
+m = re.search(r"([a-z0-9])\1+", input())
+print(m.group(1) if m else -1)
+```
+## 080 Reduce Function
+
+```python
+def product(fracs):
+    t = reduce(lambda x,y : x*y, fracs, 1)# complete this line with a reduce statement
+    return t.numerator, t.denominator
+```
+## 081 Re.findall() & Re.finditer()
+
+```python
+import re
+pattern = r'(?<=[QWRTYPSDFGHJKLZXCVBNMqwrtypsdfghjklzxcvbnm])([AEIOUaeiou]{2,})(?=[QWRTYPSDFGHJKLZXCVBNMqwrtypsdfghjklzxcvbnm])'
+a = re.findall(pattern, input())
+print('\n'.join(a or ['-1']))
 ```
