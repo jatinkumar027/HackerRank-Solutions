@@ -1057,3 +1057,13 @@ for i in range(n):
     line = input()
     print(re.sub(pattern, lambda x: 'and' if x.group() == '&&' else 'or', line))
 ```
+
+## 084 Validating Roman Numerals
+
+
+```python
+regex_pattern = r'^(?=[MDCLXVI])M{0,3}(C[MD]|D?C{0,3})(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$'	# Do not delete 'r'.
+
+import re
+print(str(bool(re.match(regex_pattern, input()))))
+```
