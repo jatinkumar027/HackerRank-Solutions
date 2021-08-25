@@ -1067,3 +1067,49 @@ regex_pattern = r'^(?=[MDCLXVI])M{0,3}(C[MD]|D?C{0,3})(X[CL]|L?X{0,3})(I[XV]|V?I
 import re
 print(str(bool(re.match(regex_pattern, input()))))
 ```
+
+## 085 Validating phone numbers
+
+```python
+import re
+
+pattern = "^[789]\d{9}$"
+
+n = int(input())
+for i in range(n):
+    if re.search(pattern, input()):
+        print("YES")
+    else:
+        print("NO")
+```
+
+## 086 Validating and Parsing Email Addresses
+
+```python
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+# import email.utils
+# print email.utils.parseaddr('DOSHI <DOSHI@hackerrank.com>')
+# print email.utils.formataddr(('DOSHI', 'DOSHI@hackerrank.com'))
+
+import re
+import email.utils
+n = int(input())
+pattern = "^[a-zA-Z][a-zA-Z0-9-_.]*@[a-zA-Z]*[.][a-zA-Z]{1,3}$"
+
+for i in range(n):
+    myEmailTuple = email.utils.parseaddr(input())
+    if re.search(pattern, myEmailTuple[1]):
+        print(email.utils.formataddr(myEmailTuple))
+```
+
+## 087 Hex Color Code
+
+```python
+import re
+n = int(input())
+pattern = "[: ]([#](?:[A-F0-9a-f]{6}|[A-F0-9a-f]{3}))"
+for i in range(n):
+    search = re.findall(pattern,input())
+    if search:
+        print(*search, sep='\n')
+```
