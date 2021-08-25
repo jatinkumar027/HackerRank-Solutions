@@ -1027,3 +1027,33 @@ pattern = r'(?<=[QWRTYPSDFGHJKLZXCVBNMqwrtypsdfghjklzxcvbnm])([AEIOUaeiou]{2,})(
 a = re.findall(pattern, input())
 print('\n'.join(a or ['-1']))
 ```
+
+## 082 Re.start() & Re.end()
+
+```python
+import re
+
+s = input()
+k = input()
+
+m = re.search(k,s)
+pattern = re.compile(k)
+if not m:
+    print("(-1, -1)")
+else:
+    while(m):
+        print("({0}, {1})".format(m.start(),m.end()-1))
+        m = pattern.search(s, m.start()+1)
+```
+
+## 083 Regex Substitution
+
+```python
+import re
+n = int(input())
+pattern = "(?<= )(&&|\|\|)(?= )"
+
+for i in range(n):
+    line = input()
+    print(re.sub(pattern, lambda x: 'and' if x.group() == '&&' else 'or', line))
+```
