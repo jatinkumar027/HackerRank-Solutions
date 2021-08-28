@@ -45,6 +45,7 @@ if __name__ == '__main__':
 
     fptr.close()
 ```
+
 ### 002 Counting Valleys
 ```python
 import math
@@ -88,6 +89,7 @@ if __name__ == '__main__':
 
     fptr.close()
 ```
+
 ### 003 Jumping on the Clouds
 ```python
 import math
@@ -312,4 +314,218 @@ if __name__ == '__main__':
         q = list(map(int, input().rstrip().split()))
 
         minimumBribes(q)
+```
+
+## Dictionaries and Hashmaps
+
+### 001 Sales by Match
+```python
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'twoStrings' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts following parameters:
+#  1. STRING s1
+#  2. STRING s2
+#
+
+def twoStrings(s1, s2):
+    # Write your code here
+    if set(s1) & set(s2):
+        return "YES"
+    return "NO"
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    q = int(input().strip())
+
+    for q_itr in range(q):
+        s1 = input()
+
+        s2 = input()
+
+        result = twoStrings(s1, s2)
+
+        fptr.write(result + '\n')
+
+    fptr.close()
+
+```
+
+### 002 Hash Tables: Ransom Note
+
+```python
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'checkMagazine' function below.
+#
+# The function accepts following parameters:
+#  1. STRING_ARRAY magazine
+#  2. STRING_ARRAY note
+#
+from collections import Counter
+def checkMagazine(magazine, note):
+    # Write your code here
+    countOfMagazine = Counter(magazine)
+    listofNote = note
+    length = len(listofNote)
+    for word in listofNote:
+        if word in countOfMagazine and countOfMagazine[word]!=0:
+            countOfMagazine[word] -= 1
+            length -= 1
+    if(length==0):
+        print("Yes")
+    else:
+        print("No")
+    
+
+if __name__ == '__main__':
+    first_multiple_input = input().rstrip().split()
+
+    m = int(first_multiple_input[0])
+
+    n = int(first_multiple_input[1])
+
+    magazine = input().rstrip().split()
+
+    note = input().rstrip().split()
+
+    checkMagazine(magazine, note)
+```
+
+## Sorting
+
+### 001 Sorting: Bubble Sort
+```python
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'countSwaps' function below.
+#
+# The function accepts INTEGER_ARRAY a as parameter.
+#
+
+def countSwaps(a):
+    count = 0
+    # Write your code here
+    for i in range(len(a)):
+        for j in range(n-i-1):
+            if a[j] > a[j+1]:
+                a[j], a[j+1] = a[j+1],a[j]
+                count +=1
+    print("Array is sorted in {c} swaps.".format(c=count))
+    print("First Element:", a[0])
+    print("Last Element:", a[len(a)-1])
+
+
+if __name__ == '__main__':
+    n = int(input().strip())
+
+    a = list(map(int, input().rstrip().split()))
+
+    countSwaps(a)
+```
+
+### 002 Mark and Toys
+
+```python
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'maximumToys' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER_ARRAY prices
+#  2. INTEGER k
+#
+
+def mergeSort(arr):
+    if len(arr)>1:
+        
+        mid = len(arr)//2
+        
+        L = arr[:mid]
+        R = arr[mid:]
+        
+        mergeSort(L)
+        mergeSort(R)
+        
+        i=j=k=0
+        
+        while i<len(L) and j< len(R):
+            if L[i]<R[j]:
+                arr[k] = L[i]
+                i+=1
+            else:
+                arr[k] = R[j]
+                j+=1
+            k+=1
+            
+        while i<len(L):
+            arr[k] = L[i]
+            i+=1
+            k+=1
+        while j<len(R):
+            arr[k] = R[j]
+            j+=1
+            k+=1
+    return arr
+
+def maximumToys(prices, k):
+    # Write your code here
+    addPrice, count = 0, 0
+    sortedPrices = mergeSort(prices)
+    for price in sortedPrices:
+        if(addPrice+price<=k):
+            addPrice+=price
+            count+=1
+    return count
+            
+    
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    first_multiple_input = input().rstrip().split()
+
+    n = int(first_multiple_input[0])
+
+    k = int(first_multiple_input[1])
+
+    prices = list(map(int, input().rstrip().split()))
+
+    result = maximumToys(prices, k)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
 ```
